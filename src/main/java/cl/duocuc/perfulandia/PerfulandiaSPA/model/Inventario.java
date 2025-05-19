@@ -1,4 +1,5 @@
 package cl.duocuc.perfulandia.PerfulandiaSPA.model;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,10 +13,14 @@ public class Inventario {
 
     @Column(nullable = false) //no se como conectar este modelo a productos
     private String productos;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idproducto")
+    private Productos producto;
 
     @Column(nullable = false)
     private int cantidad;
 
 
 
+}
 }

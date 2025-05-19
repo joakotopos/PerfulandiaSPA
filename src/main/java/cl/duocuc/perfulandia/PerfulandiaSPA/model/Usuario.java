@@ -1,12 +1,14 @@
 package cl.duocuc.perfulandia.PerfulandiaSPA.model;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Table(name = "usuario")
 @Data
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario {
-   @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idusuario;
 
@@ -18,5 +20,4 @@ public class Usuario {
 
     @Column(length = 100)
     private String contrasenausuario;
-
 }

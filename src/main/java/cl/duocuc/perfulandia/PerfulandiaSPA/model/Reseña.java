@@ -11,5 +11,12 @@ public class Reseña {
  @GeneratedValue(strategy = GenerationType.IDENTITY)
  private Integer idreseña;
 
+ @ManyToOne(fetch = FetchType.EAGER)
+ @JoinColumn(name = "idusuario")
+ private Productos producto;
+
+ @Column(length = 255)
+ private String historialpedidos;
+
 
 }
