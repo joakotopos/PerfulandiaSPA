@@ -1,18 +1,26 @@
 package cl.duocuc.perfulandia.PerfulandiaSPA.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
+
+import java.util.List;
 
 @Entity
-@Table(name = "cliente") // lol lmao even
-@Data
-@EqualsAndHashCode(callSuper = true)
+@Table(name = "cliente")
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true,exclude = {"pedidos","carrito"})
 public class Cliente extends Usuario {
     
     @Column(length = 255)
     private String direccionenvio;
-    
-    @Column(length = 255)
-    private String historialpedidos;
+
+    @OneToMany(mappedBy = "cliente")
+    @ToString.Exclude
+    private List<Pedido> pedidos;
+
+    @OneToMany(mappedBy = "cliente")
+    @ToString.Exclude
+    private List<Carrito> carrito;
 }
