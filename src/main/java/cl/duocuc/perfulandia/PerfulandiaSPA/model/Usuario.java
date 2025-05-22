@@ -25,4 +25,8 @@ public class Usuario {
 
     @Column(length = 100,nullable = false)
     private String contrasenausuario;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idsucursal")
+    private Sucursal sucursal;
 }
