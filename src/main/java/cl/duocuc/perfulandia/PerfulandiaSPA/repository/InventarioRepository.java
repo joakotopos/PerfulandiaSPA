@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import java.util.List;
 
-public interface InventarioRepostory extends JpaRepository<Inventario, Integer> {
+public interface InventarioRepository extends JpaRepository<Inventario, Integer> {
     @Query("SELECT i FROM Inventario i WHERE i.sucursal.idsucursal = :sucursalId AND i.cantidad > 0")
     List<Inventario> findBySucursalesconStock(@Param("productoId") Integer productoId);
 
