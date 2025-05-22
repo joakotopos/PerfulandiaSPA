@@ -11,11 +11,20 @@ import java.util.Optional;
 public interface ResenaRepository extends JpaRepository<Resena, Integer> {
 
     @Query("SELECT r FROM Resena r WHERE r.producto.idproducto = :productoId ORDER BY r.calificacion DESC")
-    List<Resena> findByOrdenRsenaProducto(@Param("productoId") Integer productoId);
+    List<Resena> findByProductoOrdenado(@Param("productoId") Integer productoId);
 
-    @Query("SELECT AVG(r.calificacion) FROM Resena r WHERE r.producto.idproducto = :productoId")
+    @Query("SELECT COALESCE(AVG(r.calificacion), 0.0) FROM Resena r WHERE r.producto.idproducto = :productoId")
     Double getAverageCalificacionProducto(@Param("productoId") Integer productoId);
 
     @Query("SELECT r FROM Resena r WHERE r.cliente.idusuario = :clienteId AND r.producto.idproducto = :productoId")
-    Optional<Resena> findResenaExistente(@Param("clienteId") Integer clienteId,@Param("productoId") Integer productoId);
+    Optional<Resena> findResenaExistente(
+        @Param("clienteId") Integer clienteId,
+        @Param("productoId") Integer productoId
+    );
+    
+    @Query("SELECT COUNT(r) > 0 FROM Resena r WHERE r.cliente.idusuario = :clienteId AND r.producto.idproducto = :productoId")
+    boolean existeResena(
+        @Param("clienteId") Integer clienteId,
+        @Param("productoId") Integer productoId
+    );
 }

@@ -10,13 +10,15 @@ import java.util.Optional;
 
 public interface ProveedorRepository extends JpaRepository<Proveedor, Integer> {
 
-    @Query("SELECT p FROM Proveedor p WHERE SIZE(p.productos) > 0")
+    @Query("SELECT DISTINCT p FROM Proveedor p LEFT JOIN FETCH p.productos WHERE SIZE(p.productos) > 0")
     List<Proveedor> findProveedoresConProductos();
 
     @Query("SELECT p FROM Proveedor p WHERE LOWER(p.nombre) LIKE LOWER(CONCAT('%', :nombre, '%'))")
-    List<Proveedor> findByNombre(@Param("nombre") String nombre);
+    List<Proveedor> findByNombreContainingIgnoreCase(@Param("nombre") String nombre);
 
-    @Query("SELECT p FROM Proveedor p JOIN p.productos prod WHERE prod.idproducto = :productoId")
+    @Query("SELECT p FROM Proveedor p JOIN FETCH p.productos prod WHERE prod.idproducto = :productoId")
     Optional<Proveedor> findByProductoId(@Param("productoId") Integer productoId);
-
+    
+    @Query("SELECT COUNT(p) > 0 FROM Proveedor p WHERE p.idproveedor = :id AND SIZE(p.productos) > 0")
+    boolean tieneProductosAsociados(@Param("id") Integer id);
 }
