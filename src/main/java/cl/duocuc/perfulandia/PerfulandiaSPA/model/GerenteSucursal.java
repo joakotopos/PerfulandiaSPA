@@ -12,8 +12,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class GerenteSucursal extends Usuario {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idsucursal")
-    private Sucursal sucursal;
 
 }
