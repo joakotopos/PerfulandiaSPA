@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pedidos")
+@RequestMapping("api/pedidos")
 public class PedidoController {
 
     @Autowired

@@ -34,7 +34,7 @@ public class CarritoController {
         }
     }
 
-    @PostMapping("/agregar")
+    @PostMapping("/api/agregar")
     public ResponseEntity<Carrito> agregarAlCarrito(
             @RequestParam Integer clienteId,
             @RequestParam Integer productoId,
