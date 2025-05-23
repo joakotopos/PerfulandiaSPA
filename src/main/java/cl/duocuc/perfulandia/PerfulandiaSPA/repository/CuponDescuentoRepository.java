@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
-public interface CuponDescuentoRepository extends JpaRepository<CuponDescuento, Integer> {
+public interface CuponDescuentoRepository extends JpaRepository<CuponDescuento, String> {
 
     @Query("SELECT c FROM CuponDescuento c WHERE c.activo = true AND c.fechaexpiracion >= CURRENT_DATE")
     List<CuponDescuento> findByCuponesValidos();
